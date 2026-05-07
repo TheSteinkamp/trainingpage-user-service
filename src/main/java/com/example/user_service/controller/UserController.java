@@ -55,12 +55,9 @@ public class UserController {
         if (!userService.isUserFieldsFilledAndCorrect(request)) {
             return ResponseEntity.badRequest().body("{\"message\": \"Invalid or missing credentials.\"}");
         }
-
         try {
             User user = new User(request.name(), request.email(), request.password());
-
             user = userService.createUser(user);
-
             log.info("New user registered: {} - {}", user.getEmail(), user.getName());
             return new ResponseEntity<>("{\"message\": \"User registered successfully.\"}", HttpStatus.CREATED);
         } catch (IllegalStateException e) {
@@ -71,6 +68,7 @@ public class UserController {
             return ResponseEntity.internalServerError().body("{\"message\": \"Registration failed due to server error.\"}");
         }
     }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         User user = userRepository.findByEmail(request.email()).orElse(null);

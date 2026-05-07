@@ -22,9 +22,6 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-    public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
-    }
 
     public User addUser(User user) {
         return userRepository.save(user);
@@ -44,7 +41,7 @@ public class UserService {
     public User createUser(User user) {
 
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new IllegalStateException("Användarnamnet är upptaget");
+            throw new IllegalStateException("Account with this email existing");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
