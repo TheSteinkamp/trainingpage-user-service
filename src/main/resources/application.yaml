@@ -5,9 +5,9 @@ spring:
   application:
     name: USER-SERVICE
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/db_user}
-    username: ${SPRING_DATASOURCE_USERNAME:myuser}
-    password: ${SPRING_DATASOURCE_PASSWORD:mypassword}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -19,7 +19,7 @@ spring:
 eureka:
   instance:
     hostname: user-service
-    prefer-ip-address: false
+    prefer-ip-address: true
     instance-id: user-service:8081
   client:
     fetch-registry: true
